@@ -1,0 +1,146 @@
+---
+import '../styles/global.css';
+import { services } from '../data/services';
+import { faqs } from '../data/faqs';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Business and Personal Consultants | Rise Advisory',
+  description = 'Rise Advisory will help you grow your wealth as an individual or business. We will develop your business and help you enhance your financial security as an individual.',
+} = Astro.props;
+
+const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://rise-advisory.com';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = `${site}/og-image.png`;
+const orgId = `${site}/#organization`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': orgId,
+      name: 'Rise Advisory',
+      description:
+        'A business advisory firm in Kuwait providing financial and business consultation for companies and individuals.',
+      url: `${site}/`,
+      logo: `${site}/og-image.png`,
+      image: ogImage,
+      email: 'info@rise-advisory.com',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Block 5, Parcel 41, Group A Building, Floor 9',
+        addressLocality: 'Sharq',
+        addressCountry: 'KW',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 29.37375853181783,
+        longitude: 47.98977880183676,
+      },
+      hasMap: 'https://maps.app.goo.gl/RCqhJW1xwHWs98Er6',
+      areaServed: { '@type': 'Country', name: 'Kuwait' },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'info@rise-advisory.com',
+        contactType: 'customer service',
+      },
+      sameAs: [
+        'https://www.instagram.com/riseadvisory/',
+        'https://maps.google.com/?cid=2917434890951246542',
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Advisory Services',
+        itemListElement: services.map((s) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: s.title,
+            description: s.body,
+            provider: { '@id': orgId },
+            areaServed: { '@type': 'Country', name: 'Kuwait' },
+          },
+        })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site}/#website`,
+      name: 'Rise Advisory',
+      url: `${site}/`,
+      publisher: { '@id': orgId },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': canonical,
+      name: title,
+      url: canonical,
+      isPartOf: { '@id': `${site}/#website` },
+      about: { '@id': orgId },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonical}#faq`,
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicons (company logo) -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Rise Advisory" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Body font: Raleway (the display serifs are self-hosted in global.css) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" href="/fonts/rise-heading.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/didot-w01-italic.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-full">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/*
+  Design tokens for the Rise Advisory site.
+
+  Two display serifs are self-hosted from /public/fonts:
+    - "Rise Heading"  -> headings (h1/h2/h3), upright serif
+    - "Didot W01"     -> buttons & link CTAs, italic serif
+  Body copy uses Raleway (loaded via Google Fonts in Layout.astro).
+
+  Palette (light theme):
+    navy / inverse bg : oklch(34.1% 0.096 260.77)
+    page bg           : white
+    secondary bg      : oklch(97.6% 0 0)
+    ink / text        : oklch(21.3% 0 0)
+    muted text        : oklch(30.1% 0.03 241.41)
+    hairline border   : 76% white / 24% navy
+*/
+
+@font-face {
+  font-family: 'Rise Heading';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/rise-heading.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Didot W01';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/didot-w01-italic.woff2') format('woff2');
+}
+
+@theme {
+  --font-body: 'Raleway', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Rise Heading', Georgia, 'Times New Roman', serif;
+  --font-button: 'Didot W01', 'Rise Heading', Georgia, serif;
+
+  /* Palette */
+  --color-navy: oklch(34.1% 0.096 260.77);
+  --color-ink: oklch(21.3% 0 0);
+  --color-muted: oklch(30.1% 0.03 241.41);
+  --color-surface: oklch(97.6% 0 0);
+  --color-line: color-mix(in oklch, white 76%, oklch(34.1% 0.096 260.77));
+
+  /* The original uses square corners throughout */
+  --radius-none: 0px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background-color: white;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+  }
+
+  /* Offset anchor jumps for the sticky header */
+  :target {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  /* Solid display button (white on dark sections) — sharp corners, Didot italic */
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-button);
+    font-style: italic;
+    padding: 1rem 2rem;
+    transition: opacity 0.2s ease;
+  }
+  .btn-solid:hover {
+    opacity: 0.9;
+  }
+
+  /* Underlined text-link CTA — Didot italic */
+  .btn-link {
+    font-family: var(--font-button);
+    font-style: italic;
+    padding-bottom: 0.125rem;
+    border-bottom: 1px solid;
+    transition: border-color 0.2s ease;
+  }
+
+  /* Uppercase eyebrow label (Raleway) */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+}

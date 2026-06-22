@@ -1,0 +1,49 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Listen',
+    body: 'We start by understanding your goals, your concerns, and how your business runs day to day, before we suggest anything.',
+  },
+  {
+    number: '02',
+    title: 'Diagnose',
+    body: 'We review the numbers alongside your operations to find what is really causing the problem, rather than treating the symptoms.',
+  },
+  {
+    number: '03',
+    title: 'Recommend',
+    body: 'We set out prioritized solutions in plain language, with a work plan you can act on.',
+  },
+  {
+    number: '04',
+    title: 'Follow through',
+    body: 'We stay involved while you put the plan in place, following up regularly and adjusting as things develop.',
+  },
+];
+---
+
+<section id="approach" class="w-full bg-navy text-white">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 md:py-28 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-5 text-white/60">How we work</p>
+      <h2 class="text-balance text-3xl font-normal leading-[1.2] md:text-4xl">
+        How an engagement works, from first conversation to follow-up
+      </h2>
+    </div>
+
+    <div class="mt-16 grid gap-px bg-white/15 sm:grid-cols-2">
+      {
+        steps.map((step) => (
+          <div class="bg-navy px-2 py-8 sm:px-8">
+            <div class="flex items-baseline gap-4">
+              <span class="font-heading text-xl tabular-nums text-white/40">{step.number}</span>
+              <h3 class="font-heading text-2xl text-white">{step.title}</h3>
+            </div>
+            <p class="mt-4 text-base leading-[1.8] text-white/80">{step.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.webp';
+
+const links = [
+  { label: 'About', href: '#about' },
+  { label: 'Approach', href: '#approach' },
+  { label: 'Services', href: '#services' },
+  { label: 'Clients', href: '#clients' },
+];
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-line/60 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
+    <a href="#top" aria-label="Rise Advisory home" class="flex items-center">
+      <Image src={logo} alt="Rise Advisory" width={140} height={63} class="h-12 w-auto object-contain" />
+    </a>
+
+    <nav class="hidden items-center gap-9 md:flex">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm tracking-wide text-ink/80 transition-colors hover:text-ink"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="#contact"
+      class="btn-link border-ink/40 text-sm text-ink hover:border-ink"
+    >
+      Get in touch
+    </a>
+  </div>
+</header>

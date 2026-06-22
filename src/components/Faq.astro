@@ -1,0 +1,25 @@
+---
+import { faqs } from '../data/faqs';
+---
+
+<section id="faq" class="w-full bg-white">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 md:py-28 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-5 text-muted">Common questions</p>
+      <h2 class="text-balance text-3xl font-normal leading-[1.2] text-ink md:text-4xl">
+        What people ask before they reach out
+      </h2>
+    </div>
+
+    <dl class="mt-14 border-t border-line/60">
+      {
+        faqs.map((faq) => (
+          <div class="grid gap-2 border-b border-line/60 py-8 md:grid-cols-[0.4fr_0.6fr] md:gap-10">
+            <dt class="font-heading text-xl text-ink">{faq.question}</dt>
+            <dd class="max-w-2xl text-lg leading-[1.8] text-ink/90">{faq.answer}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

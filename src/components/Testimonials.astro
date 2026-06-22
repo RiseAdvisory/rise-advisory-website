@@ -1,0 +1,55 @@
+---
+const testimonials = [
+  {
+    quote:
+      "Rise highlighted many issues we were facing in the clinic, analyzed the problems, and listed the necessary solutions clearly — in a way that was feasible and flexible. What I'm most pleased about is the constant follow-up and commitment. It's obvious they are building trust with us, and succeeding.",
+    name: 'Fatima Al Hamad',
+    role: 'Aisha Al Raqum Physical Therapy Centre',
+  },
+  {
+    quote:
+      'My experience with Rise was excellent from the first meeting, where all our needs were understood and a clear work plan was developed professionally. They were constantly following up and readily available to support us.',
+    name: 'Ahmed Khalil Ismail',
+    role: 'Fan Alseher Al Dimashqi Salon',
+  },
+  {
+    quote:
+      "My experience with Rise was amazing. I was able to reduce the company's costs, increase profits, and avoid future losses.",
+    name: 'Ali Ibrahim Marafi',
+    role: 'FCC United Restaurant',
+  },
+  {
+    quote:
+      'Rise helped me secure my future with a rock-solid plan that prioritizes saving and investing — without compromising on my lifestyle essentials.',
+    name: 'Mohammad Taher',
+    role: 'Personal Financial Plan',
+  },
+];
+---
+
+<section id="clients" class="w-full bg-surface">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 md:py-28 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-5 text-muted">In their words</p>
+      <h2 class="text-balance text-3xl font-normal leading-[1.2] text-ink md:text-4xl">
+        What our clients say
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-px bg-line/60 md:grid-cols-2">
+      {
+        testimonials.map((t) => (
+          <figure class="flex flex-col bg-surface px-2 py-10 md:px-10">
+            <blockquote class="text-lg leading-[1.85] text-ink/90">
+              &ldquo;{t.quote}&rdquo;
+            </blockquote>
+            <figcaption class="mt-6">
+              <p class="font-heading text-lg text-ink">{t.name}</p>
+              <p class="mt-1 text-sm uppercase tracking-[0.14em] text-muted">{t.role}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

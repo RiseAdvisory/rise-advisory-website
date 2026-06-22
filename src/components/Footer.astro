@@ -1,0 +1,68 @@
+---
+const year = new Date().getFullYear();
+
+const nav = [
+  { label: 'About', href: '#about' },
+  { label: 'Approach', href: '#approach' },
+  { label: 'Services', href: '#services' },
+  { label: 'Clients', href: '#clients' },
+];
+
+const social = [
+  { label: 'Google', href: 'https://maps.app.goo.gl/RCqhJW1xwHWs98Er6' },
+  { label: 'Instagram', href: 'https://www.instagram.com/riseadvisory/' },
+];
+---
+
+<footer class="w-full border-t border-line/60 bg-surface">
+  <div class="mx-auto w-full max-w-6xl px-6 py-16 lg:px-8">
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <p class="font-heading text-xl text-ink">Rise Advisory</p>
+        <p class="mt-3 max-w-xs text-sm leading-[1.7] text-muted">
+          A business advisory firm in Kuwait, helping individuals and businesses
+          grow.
+        </p>
+      </div>
+
+      <nav class="flex flex-col gap-3">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="w-fit text-sm text-ink/80 transition-colors hover:text-ink"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div>
+        <p class="text-sm leading-[1.9] text-muted">
+          <a href="mailto:info@rise-advisory.com" class="transition-colors hover:text-ink">
+            info@rise-advisory.com
+          </a>
+        </p>
+        <div class="flex gap-4 pt-2">
+          {
+            social.map((item) => (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                class="text-sm text-muted transition-colors hover:text-ink"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-12 border-t border-line/60 pt-6 text-xs text-muted">
+      &copy; {year} Rise Advisory. All rights reserved.
+    </p>
+  </div>
+</footer>
