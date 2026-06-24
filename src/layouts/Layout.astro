@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'Business and Personal Consultants | Rise Advisory',
-  description = 'Rise Advisory will help you grow your wealth as an individual or business. We will develop your business and help you enhance your financial security as an individual.',
+  description = 'Rise Advisory is a Kuwait advisory firm combining finance, business development, and technology, working alongside you to put plans into action, not just advise.',
 } = Astro.props;
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://rise-advisory.com';
@@ -26,7 +26,7 @@ const jsonLd = {
       '@id': orgId,
       name: 'Rise Advisory',
       description:
-        'A business advisory firm in Kuwait providing financial and business consultation for companies and individuals.',
+        'A business advisory firm in Kuwait combining finance, business development, and technology, working alongside companies and individuals to put plans into action, not just advise.',
       url: `${site}/`,
       logo: `${site}/og-image.png`,
       image: ogImage,

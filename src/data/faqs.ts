@@ -9,7 +9,7 @@ export const faqs: Faq[] = [
   {
     question: 'What does Rise Advisory do?',
     answer:
-      'Rise Advisory is a business advisory firm based in Kuwait. We provide financial and business consultation for both companies and individuals, helping you improve how your business runs and plan for what comes next.',
+      'Rise Advisory is a business advisory firm based in Kuwait. We combine finance, business development, and technology to help companies and individuals grow, and we work alongside you to put the plan into action rather than just advise.',
   },
   {
     question: 'Where is Rise Advisory located?',
@@ -20,6 +20,11 @@ export const faqs: Faq[] = [
     question: 'What services does Rise Advisory offer?',
     answer:
       'We offer Business Consultation, Business Inspection (pre-purchase reviews), Business Assessment (identifying issues and solutions), Personal Financial Planning, and Investment Review. We work with both businesses and individuals.',
+  },
+  {
+    question: 'Does Rise Advisory work with technology and AI?',
+    answer:
+      'Yes. Technology is one of our three core strengths, alongside finance and business development. We help businesses use technology and AI to streamline how they run and find new ways to grow.',
   },
   {
     question: 'Can Rise Advisory help me before I buy a business?',

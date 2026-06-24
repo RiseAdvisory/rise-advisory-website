@@ -1,0 +1,45 @@
+---
+const strengths = [
+  {
+    title: 'Finance',
+    body: 'Sound financial decisions, planning, and investment that protect and grow what you have.',
+  },
+  {
+    title: 'Business Development',
+    body: 'Practical guidance on growth, operations, and the decisions that move your business forward.',
+  },
+  {
+    title: 'Technology & AI',
+    body: 'Bringing technology and AI into your business to streamline how it runs and open new ways to grow.',
+  },
+];
+---
+
+<section id="strengths" class="w-full bg-surface">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 md:py-28 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="eyebrow mb-5 text-muted">What we bring</p>
+      <h2 class="text-balance text-3xl font-normal leading-[1.2] text-ink md:text-4xl">
+        We don&rsquo;t just advise. We help you put it into action.
+      </h2>
+      <p class="mt-6 text-lg leading-[1.8] text-ink/90">
+        Our work brings together three strengths: finance, business development,
+        and technology. We stay involved from the first conversation through to
+        the results, working alongside you rather than handing over a report.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-12 md:grid-cols-3">
+      {
+        strengths.map((s) => (
+          <div>
+            <h3 class="border-b border-line/60 pb-5 font-heading text-2xl text-ink">
+              {s.title}
+            </h3>
+            <p class="mt-5 text-lg leading-[1.8] text-ink/90">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
