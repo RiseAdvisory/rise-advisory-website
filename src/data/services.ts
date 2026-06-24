@@ -23,6 +23,11 @@ export const services: Service[] = [
     body: 'We identify the issues holding your business back and set out practical solutions you can prioritize.',
   },
   {
+    title: 'Technology & AI',
+    audience: 'For businesses',
+    body: 'We streamline your operations with technology and AI, putting in place the workflows and processes that make your business run better.',
+  },
+  {
     title: 'Personal Financial Planning',
     audience: 'For individuals',
     body: 'A plan that protects your future without giving up the things that matter to you today.',
