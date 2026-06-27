@@ -1,19 +1,31 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../assets/logo.webp';
+import type { Content, Lang } from '../i18n';
+import { locales, otherLang } from '../i18n';
+
+interface Props {
+  nav: Content['nav'];
+  lang: Lang;
+}
+const { nav, lang } = Astro.props;
 
 const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Strengths', href: '#strengths' },
-  { label: 'Approach', href: '#approach' },
-  { label: 'Services', href: '#services' },
-  { label: 'Clients', href: '#clients' },
+  { label: nav.about, href: '#about' },
+  { label: nav.strengths, href: '#strengths' },
+  { label: nav.approach, href: '#approach' },
+  { label: nav.services, href: '#services' },
+  { label: nav.clients, href: '#clients' },
 ];
+
+const other = otherLang[lang];
+const switchHref = locales[other].path;
+const switchLabel = locales[lang].switchLabel;
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-line/60 bg-white/95 backdrop-blur">
   <div class="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
-    <a href="#top" aria-label="Rise Advisory home" class="flex items-center">
+    <a href="#top" aria-label="Rise Advisory" class="flex items-center">
       <Image src={logo} alt="Rise Advisory" width={140} height={63} class="h-12 w-auto object-contain" />
     </a>
 
@@ -30,11 +42,17 @@ const links = [
       }
     </nav>
 
-    <a
-      href="#contact"
-      class="btn-link border-ink/40 text-sm text-ink hover:border-ink"
-    >
-      Get in touch
-    </a>
+    <div class="flex items-center gap-5">
+      <a
+        href={switchHref}
+        hreflang={other}
+        class="text-sm font-medium text-ink/70 transition-colors hover:text-ink"
+      >
+        {switchLabel}
+      </a>
+      <a href="#contact" class="btn-link border-ink/40 text-sm text-ink hover:border-ink">
+        {nav.getInTouch}
+      </a>
+    </div>
   </div>
 </header>

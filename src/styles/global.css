@@ -107,3 +107,35 @@
     letter-spacing: 0.18em;
   }
 }
+
+/*
+  Arabic / RTL
+  Arabic has no uppercase, and letter-spacing breaks Arabic letter joining,
+  so both are disabled. Latin display serifs have no Arabic glyphs, so the
+  Arabic build uses Amiri (headings) + Tajawal (body, buttons, labels).
+*/
+[dir='rtl'] .eyebrow,
+[dir='rtl'] .uppercase {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+[lang='ar'] body {
+  font-family: 'Tajawal', system-ui, sans-serif;
+  line-height: 1.85;
+}
+
+[lang='ar'] h1,
+[lang='ar'] h2,
+[lang='ar'] h3,
+[lang='ar'] h4,
+[lang='ar'] .font-heading {
+  font-family: 'Amiri', Georgia, serif;
+}
+
+[lang='ar'] .btn-solid,
+[lang='ar'] .btn-link,
+[lang='ar'] .eyebrow {
+  font-family: 'Tajawal', system-ui, sans-serif;
+  font-style: normal;
+}

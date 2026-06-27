@@ -1,19 +1,24 @@
 ---
-import { services } from '../data/services';
+import type { Content } from '../i18n';
+
+interface Props {
+  content: Content['services'];
+}
+const { content } = Astro.props;
 ---
 
 <section id="services" class="w-full bg-surface">
   <div class="mx-auto w-full max-w-6xl px-6 py-24 md:py-28 lg:px-8">
     <div class="max-w-2xl">
-      <p class="eyebrow mb-5 text-muted">What we do</p>
+      <p class="eyebrow mb-5 text-muted">{content.eyebrow}</p>
       <h2 class="text-balance text-3xl font-normal leading-[1.2] text-ink md:text-4xl">
-        What we help businesses and individuals with
+        {content.h2}
       </h2>
     </div>
 
     <div class="mt-14 border-t border-line/60">
       {
-        services.map((service) => (
+        content.items.map((service) => (
           <div class="grid gap-2 border-b border-line/60 py-8 md:grid-cols-[0.32fr_0.68fr] md:gap-10">
             <div>
               <h3 class="font-heading text-2xl text-ink">{service.title}</h3>
@@ -28,11 +33,11 @@ import { services } from '../data/services';
     </div>
 
     <p class="mt-10 max-w-2xl text-base leading-[1.8] text-ink/80">
-      Every engagement begins with a conversation.{' '}
+      {content.ctaLead}{' '}
       <a href="#contact" class="border-b border-ink/40 pb-0.5 text-ink transition-colors hover:border-ink">
-        Tell us what you are dealing with
+        {content.ctaLink}
       </a>{' '}
-      and we will let you know whether we can help.
+      {content.ctaTail}
     </p>
   </div>
 </section>

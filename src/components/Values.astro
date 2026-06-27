@@ -1,29 +1,21 @@
 ---
-const values = [
-  {
-    title: 'Quality',
-    body: 'Careful, thorough work. We stand behind every recommendation we make.',
-  },
-  {
-    title: 'Integrity',
-    body: 'Honest advice, even when it is not what you were hoping to hear.',
-  },
-  {
-    title: 'Results',
-    body: 'We measure our success by the difference our work makes to your business and your finances.',
-  },
-];
+import type { Content } from '../i18n';
+
+interface Props {
+  content: Content['values'];
+}
+const { content } = Astro.props;
 ---
 
 <section id="values" class="w-full bg-white">
   <div class="mx-auto w-full max-w-6xl px-6 py-24 md:py-28 lg:px-8">
     <h2 class="max-w-2xl text-balance text-3xl font-normal leading-[1.2] text-ink md:text-4xl">
-      What we hold ourselves to
+      {content.h2}
     </h2>
 
     <div class="mt-14 grid gap-12 md:grid-cols-3">
       {
-        values.map((value) => (
+        content.items.map((value) => (
           <div>
             <h3 class="border-b border-line/60 pb-5 font-heading text-2xl text-ink">
               {value.title}

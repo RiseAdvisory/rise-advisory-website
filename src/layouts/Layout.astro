@@ -1,22 +1,27 @@
 ---
 import '../styles/global.css';
-import { services } from '../data/services';
-import { faqs } from '../data/faqs';
+import { content as allContent, locales } from '../i18n';
+import type { Lang } from '../i18n';
 
 interface Props {
-  title?: string;
-  description?: string;
+  lang?: Lang;
 }
-
-const {
-  title = 'Business and Personal Consultants | Rise Advisory',
-  description = 'Rise Advisory is a Kuwait advisory firm combining finance, business development, and technology, working alongside you to put plans into action, not just advise.',
-} = Astro.props;
+const { lang = 'en' } = Astro.props;
+const c = allContent[lang];
+const loc = locales[lang];
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? 'https://rise-advisory.com';
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const canonical = new URL(loc.path, Astro.site).href;
 const ogImage = `${site}/og-image.png`;
 const orgId = `${site}/#organization`;
+
+const alternates = [
+  { hreflang: 'en', href: `${site}/` },
+  { hreflang: 'ar', href: `${site}/ar/` },
+  { hreflang: 'x-default', href: `${site}/` },
+];
+const ogLocale = lang === 'ar' ? 'ar_KW' : 'en_US';
+const ogLocaleAlt = lang === 'ar' ? 'en_US' : 'ar_KW';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -25,8 +30,7 @@ const jsonLd = {
       '@type': 'ProfessionalService',
       '@id': orgId,
       name: 'Rise Advisory',
-      description:
-        'A business advisory firm in Kuwait combining finance, business development, and technology, working alongside companies and individuals to put plans into action, not just advise.',
+      description: c.meta.description,
       url: `${site}/`,
       logo: `${site}/og-image.png`,
       image: ogImage,
@@ -49,6 +53,7 @@ const jsonLd = {
         '@type': 'ContactPoint',
         email: 'info@rise-advisory.com',
         contactType: 'customer service',
+        availableLanguage: ['English', 'Arabic'],
       },
       sameAs: [
         'https://www.instagram.com/riseadvisory/',
@@ -57,7 +62,7 @@ const jsonLd = {
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Advisory Services',
-        itemListElement: services.map((s) => ({
+        itemListElement: c.services.items.map((s) => ({
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
@@ -75,19 +80,22 @@ const jsonLd = {
       name: 'Rise Advisory',
       url: `${site}/`,
       publisher: { '@id': orgId },
+      inLanguage: ['en', 'ar'],
     },
     {
       '@type': 'WebPage',
       '@id': canonical,
-      name: title,
+      name: c.meta.title,
       url: canonical,
       isPartOf: { '@id': `${site}/#website` },
       about: { '@id': orgId },
+      inLanguage: lang,
     },
     {
       '@type': 'FAQPage',
       '@id': `${canonical}#faq`,
-      mainEntity: faqs.map((f) => ({
+      inLanguage: lang,
+      mainEntity: c.faq.items.map((f) => ({
         '@type': 'Question',
         name: f.question,
         acceptedAnswer: { '@type': 'Answer', text: f.answer },
@@ -98,45 +106,67 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang={loc.htmlLang} dir={loc.dir} class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Favicons (company logo) -->
+    <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{c.meta.title}</title>
+    <meta name="description" content={c.meta.description} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
 
+    <!-- Language alternates -->
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+
+    <!-- Local / geo signals (Kuwait) -->
+    <meta name="geo.region" content="KW" />
+    <meta name="geo.placename" content="Kuwait City" />
+    <meta name="geo.position" content="29.373759;47.989779" />
+    <meta name="ICBM" content="29.373759, 47.989779" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={c.meta.title} />
+    <meta property="og:description" content={c.meta.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Rise Advisory" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={c.meta.title} />
+    <meta name="twitter:description" content={c.meta.description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Body font: Raleway (the display serifs are self-hosted in global.css) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preload" href="/fonts/rise-heading.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/didot-w01-italic.woff2" as="font" type="font/woff2" crossorigin />
+    {
+      lang === 'ar' ? (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      ) : (
+        <Fragment>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link rel="preload" href="/fonts/rise-heading.woff2" as="font" type="font/woff2" crossorigin />
+          <link rel="preload" href="/fonts/didot-w01-italic.woff2" as="font" type="font/woff2" crossorigin />
+        </Fragment>
+      )
+    }
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>

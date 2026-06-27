@@ -1,0 +1,35 @@
+---
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Strengths from './Strengths.astro';
+import Approach from './Approach.astro';
+import Services from './Services.astro';
+import Values from './Values.astro';
+import Testimonials from './Testimonials.astro';
+import Faq from './Faq.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import { content as allContent } from '../i18n';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = allContent[lang];
+---
+
+<Header nav={c.nav} lang={lang} />
+<main>
+  <Hero content={c.hero} />
+  <About content={c.about} />
+  <Strengths content={c.strengths} />
+  <Approach content={c.approach} />
+  <Services content={c.services} />
+  <Values content={c.values} />
+  <Testimonials content={c.testimonials} />
+  <Faq content={c.faq} />
+  <Contact content={c.contact} />
+</main>
+<Footer nav={c.nav} content={c.footer} />
