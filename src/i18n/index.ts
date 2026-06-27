@@ -69,7 +69,7 @@ export interface Content {
     officeLabel: string;
     addressLines: string[];
   };
-  footer: { blurb: string; rights: string };
+  footer: { brand: string; blurb: string; rights: string };
 }
 
 export const content: Record<Lang, Content> = { en, ar };

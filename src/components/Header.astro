@@ -2,13 +2,14 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/logo.webp';
 import type { Content, Lang } from '../i18n';
-import { locales, otherLang } from '../i18n';
+import { content as allContent, locales, otherLang } from '../i18n';
 
 interface Props {
   nav: Content['nav'];
   lang: Lang;
 }
 const { nav, lang } = Astro.props;
+const brand = allContent[lang].footer.brand;
 
 const links = [
   { label: nav.about, href: '#about' },
@@ -25,8 +26,8 @@ const switchLabel = locales[lang].switchLabel;
 
 <header class="sticky top-0 z-50 w-full border-b border-line/60 bg-white/95 backdrop-blur">
   <div class="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 lg:px-8">
-    <a href="#top" aria-label="Rise Advisory" class="flex items-center">
-      <Image src={logo} alt="Rise Advisory" width={140} height={63} class="h-12 w-auto object-contain" />
+    <a href="#top" aria-label={brand} class="flex items-center">
+      <Image src={logo} alt={brand} width={140} height={63} class="h-12 w-auto object-contain" />
     </a>
 
     <nav class="hidden items-center gap-9 md:flex">

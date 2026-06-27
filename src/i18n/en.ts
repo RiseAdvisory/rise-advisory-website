@@ -214,6 +214,7 @@ const en: Content = {
     addressLines: ['Kuwait, Sharq, Block 5, Parcel 41,', 'Group A Building, Floor 9'],
   },
   footer: {
+    brand: 'Rise Advisory',
     blurb:
       'A business advisory firm in Kuwait, working with individuals and businesses across the Gulf.',
     rights: 'Rise Advisory. All rights reserved.',
